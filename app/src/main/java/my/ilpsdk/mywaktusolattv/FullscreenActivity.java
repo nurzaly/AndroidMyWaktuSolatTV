@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
@@ -16,6 +17,7 @@ import android.view.WindowInsets;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import my.ilpsdk.mywaktusolattv.databinding.ActivityFullscreenBinding;
 
@@ -109,6 +111,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private ActivityFullscreenBinding binding;
 
     private WebView mywebView;
+    private String url = "http://apps.ilpsdk.gov.my/mywaktusolattv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +126,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mywebView=(WebView) findViewById(R.id.webview);
         mywebView.setWebViewClient(new WebViewClient());
-        mywebView.loadUrl("http://apps.ilpsdk.gov.my/mywaktusolattv");
+        mywebView.loadUrl(this.url);
         WebSettings webSettings=mywebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
@@ -138,7 +141,14 @@ public class FullscreenActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        binding.dummyButton.setOnTouchListener(mDelayHideTouchListener);
+//        binding.btnSettig.setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("onresume", "onResume: ");
+        mywebView.loadUrl(this.url);
     }
 
     @Override
@@ -149,6 +159,17 @@ public class FullscreenActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
+    }
+
+    public void reload(View view){
+
+        mywebView.loadUrl(this.url);
+
+        Toast.makeText(this, "Reload", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setting(View view){
+        Toast.makeText(this, "On Progress...", Toast.LENGTH_SHORT).show();
     }
 
     private void toggle() {

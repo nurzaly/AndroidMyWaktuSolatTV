@@ -42,12 +42,22 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/dummy_button"
+                android:id="@+id/btn_setting"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="setting"
                 android:text="@string/dummy_button" />
+
+            <Button
+                android:id="@+id/btn_reload"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="reload"
+                android:text="Reload" />
 
         </LinearLayout>
     </FrameLayout>
