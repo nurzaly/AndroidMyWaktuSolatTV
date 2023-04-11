@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -129,6 +130,9 @@ public class FullscreenActivity extends AppCompatActivity {
         mywebView.loadUrl(this.url);
         WebSettings webSettings=mywebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+//        Intent myIntent = new Intent(this, CheckIdActivity.class);
+//        this.startActivity(myIntent);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
