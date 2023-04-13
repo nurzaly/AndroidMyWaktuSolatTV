@@ -31,7 +31,7 @@ private ActivityCheckIdBinding binding;
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Any enquiry please contact 0138817731", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

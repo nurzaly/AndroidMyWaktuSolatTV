@@ -17,8 +17,14 @@ android {
     }
 
     buildTypes {
+        debug {
+//            buildConfigField "String", "SERVER_URL", '"http://192.168.0.158/myprayertime/public/index.php"'
+            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolattv"'
+//            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mystaff/"'
+        }
         release {
             minifyEnabled false
+            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolattv"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -41,4 +47,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
+

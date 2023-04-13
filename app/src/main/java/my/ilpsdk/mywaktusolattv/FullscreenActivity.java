@@ -1,5 +1,7 @@
 package my.ilpsdk.mywaktusolattv;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 
 import androidx.appcompat.app.ActionBar;
@@ -117,7 +119,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private ActivityFullscreenBinding binding;
 
     private WebView mywebView;
-    private String url = "http://apps.ilpsdk.gov.my/mywaktusolattv";
+    private String url = "http://apps.ilpsdk.gov.my/mywaktusolat/display";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,15 +139,11 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mywebView=(WebView) findViewById(R.id.webview);
         mywebView.setWebViewClient(new WebViewClient());
-        mywebView.loadUrl(this.url);
 
         WebSettings webSettings=mywebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        if(config.getString(Constant.KEY_MASJId_ID,"def").length() < 5 && config.getString(Constant.KEY_MASJId_ID, "def").equals("def")){
-            Intent myIntent = new Intent(this, CheckIdActivity.class);
-            this.startActivity(myIntent);
-        }
+        checkUrl();
 
 //        Intent myIntent = new Intent(this, CheckIdActivity.class);
 //        this.startActivity(myIntent);
@@ -164,11 +162,24 @@ public class FullscreenActivity extends AppCompatActivity {
 //        binding.btnSettig.setOnTouchListener(mDelayHideTouchListener);
     }
 
+    public void checkUrl(){
+        if(config.getString(Constant.KEY_MASJId_ID,"def").length() < 5 && config.getString(Constant.KEY_MASJId_ID, "def").equals("def")){
+            Intent myIntent = new Intent(this, CheckIdActivity.class);
+            this.startActivity(myIntent);
+        }
+        else{
+            String masjid_id = config.getString(Constant.KEY_MASJId_ID,"def");
+//            this.url += "?masjid_id="+masjid_id;
+            Log.d("test", "checkUrl: " + this.url);
+            mywebView.loadUrl(this.url + "?masjid_id="+masjid_id);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("onresume", "onResume: ");
-        mywebView.loadUrl(this.url);
+        checkUrl();
     }
 
     @Override
@@ -183,7 +194,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     public void reload(View view){
 
-        mywebView.loadUrl(this.url);
+        checkUrl();
 
         Toast.makeText(this, "Reload", Toast.LENGTH_SHORT).show();
     }
