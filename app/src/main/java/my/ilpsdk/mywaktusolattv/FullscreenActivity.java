@@ -48,6 +48,9 @@ public class FullscreenActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler(Looper.myLooper());
     private View mContentView;
+
+    private SharedPreferences config;
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -123,12 +126,14 @@ public class FullscreenActivity extends AppCompatActivity {
         binding = ActivityFullscreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        config = getSharedPreferences(Constant.KEY_CONFIG, 0);
+
         SharedPreferences prefs = this.getSharedPreferences(
                 "waktusolat", Context.MODE_PRIVATE);
 
         mVisible = true;
         mControlsView = binding.fullscreenContentControls;
-//        mContentView = binding.fullscreenContent;
+        mContentView = binding.fullscreenContent;
 
         mywebView=(WebView) findViewById(R.id.webview);
         mywebView.setWebViewClient(new WebViewClient());
@@ -136,6 +141,11 @@ public class FullscreenActivity extends AppCompatActivity {
 
         WebSettings webSettings=mywebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        if(config.getString(Constant.KEY_MASJId_ID,"def").length() < 5 && config.getString(Constant.KEY_MASJId_ID, "def").equals("def")){
+            Intent myIntent = new Intent(this, CheckIdActivity.class);
+            this.startActivity(myIntent);
+        }
 
 //        Intent myIntent = new Intent(this, CheckIdActivity.class);
 //        this.startActivity(myIntent);
