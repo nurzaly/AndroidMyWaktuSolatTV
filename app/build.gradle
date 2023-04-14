@@ -24,7 +24,7 @@ android {
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
+//            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

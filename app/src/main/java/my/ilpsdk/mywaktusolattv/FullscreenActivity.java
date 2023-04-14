@@ -119,7 +119,6 @@ public class FullscreenActivity extends AppCompatActivity {
     private ActivityFullscreenBinding binding;
 
     private WebView mywebView;
-    private String url = "http://apps.ilpsdk.gov.my/mywaktusolat/display";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,9 +168,10 @@ public class FullscreenActivity extends AppCompatActivity {
         }
         else{
             String masjid_id = config.getString(Constant.KEY_MASJId_ID,"def");
-//            this.url += "?masjid_id="+masjid_id;
-            Log.d("test", "checkUrl: " + this.url);
-            mywebView.loadUrl(this.url + "?masjid_id="+masjid_id);
+            String url = Constant.DISPLAY_URL + "?masjid_id=" + masjid_id;
+
+            Log.d("test", url);
+            mywebView.loadUrl(url);
         }
     }
 

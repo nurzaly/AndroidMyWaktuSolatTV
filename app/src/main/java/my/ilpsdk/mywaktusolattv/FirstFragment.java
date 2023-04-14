@@ -68,10 +68,13 @@ private Context context;
         });
     }
     public void post(String masjid_id) {
+        String  url = Constant.SERVER_URL + "check-id";
+        Log.d("test", "post: " + url);
         RequestBody requestBody = new FormBody.Builder()
                 .add("masjid_id", masjid_id)
                 .build();
-        Request request = new Request.Builder().url(Constant.SERVER_URL + "check-id").post(requestBody).build();
+        Request request = new Request.Builder().url(url).post(requestBody).build();
+
         client = new OkHttpClient();
         client.newCall(request).enqueue(new Callback() {
             @Override
