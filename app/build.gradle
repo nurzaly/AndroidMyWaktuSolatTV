@@ -8,9 +8,9 @@ android {
 
     defaultConfig {
         applicationId "my.ilpsdk.mywaktusolattv"
-        minSdk 25
+        minSdk 24
         targetSdk 33
-        versionCode 5
+        versionCode 8
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -18,13 +18,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"http://192.168.0.158/myprayertime/public/index.php"'
-//            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
-//            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mystaff/"'
+//            buildConfigField "String", "SERVER_URL", '"httIYp://192.168.0.158/myprayertime/public/index.php"'
+            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
         }
         release {
             minifyEnabled false
-//            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
+            buildConfigField "String", "SERVER_URL", '"http://apps.ilpsdk.gov.my/mywaktusolat"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

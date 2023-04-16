@@ -1,7 +1,5 @@
 package my.ilpsdk.mywaktusolattv;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -93,6 +92,7 @@ public class FullscreenActivity extends AppCompatActivity {
             hide();
         }
     };
+
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -141,6 +141,9 @@ public class FullscreenActivity extends AppCompatActivity {
 
         WebSettings webSettings=mywebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        mywebView.setWebChromeClient(new WebChromeClient());
+        mywebView.setWebViewClient(new WebViewClient());
 
         checkUrl();
 
@@ -171,6 +174,8 @@ public class FullscreenActivity extends AppCompatActivity {
             String url = Constant.DISPLAY_URL + "?masjid_id=" + masjid_id;
 
             Log.d("test", url);
+
+
             mywebView.loadUrl(url);
         }
     }
