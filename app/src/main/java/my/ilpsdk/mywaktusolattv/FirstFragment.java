@@ -1,5 +1,7 @@
 package my.ilpsdk.mywaktusolattv;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import my.ilpsdk.mywaktusolattv.databinding.FragmentFirstBinding;
 import okhttp3.Call;
@@ -66,6 +69,28 @@ private Context context;
                 }
             }
         });
+    }
+    public void reloadOnNewToday(){
+        // Create a new calendar instance
+        Calendar calendar = Calendar.getInstance();
+
+// Set the time to 12:00 AM
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+// Create a new Intent for the AlarmReceiver class
+        Intent intent = new Intent(context, AlarmReceiver.class);
+
+// Create a PendingIntent to be triggered when the alarm goes off
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+// Get the AlarmManager service
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+// Set the alarm to trigger at the specified time
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
     }
     public void post(String masjid_id) {
         String  url = Constant.SERVER_URL + "check-id";
